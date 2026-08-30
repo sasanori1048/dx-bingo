@@ -33,6 +33,12 @@ const bingoLines = [
    状態管理
 ------------------------------------------------------------ */
 let stamped = new Set();
+// ★保存データを復元する
+const saved = localStorage.getItem("stamped");
+if (saved) {
+    stamped = new Set(JSON.parse(saved));
+}
+
 let bingoCount = 0;
 
 /* ------------------------------------------------------------
@@ -56,6 +62,11 @@ function init() {
             div.classList.add("free");
             stamped.add(index);
         }
+       // ★保存されたスタンプ状態を反映する
+　　　　if (stamped.has(index)) {
+    　　　　div.classList.add("stamped");
+　　　　}
+
 
         div.innerHTML = `
             <div class="cell-icon">${cell.icon}</div>
@@ -72,6 +83,9 @@ function init() {
 
     updateUI();
 }
+// ★スタンプ状態を保存する
+localStorage.setItem("stamped", JSON.stringify([...stamped]));
+
 // URLパラメータから id を取得して該当マスを開く
 const params = new URLSearchParams(window.location.search);
 const id = params.get("id");
@@ -83,6 +97,8 @@ if (id) {
         // ★内部状態も更新する（これが重要）
         const index = Number(id) - 1;
         stamped.add(index);
+　　　　// ★保存する
+　　　　localStorage.setItem("stamped", JSON.stringify([...stamped]));
 
         // 見た目も更新
         targetCell.classList.add("stamped");
