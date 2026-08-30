@@ -63,9 +63,9 @@ function init() {
             stamped.add(index);
         }
        // ★保存されたスタンプ状態を反映する
-　　　　if (stamped.has(index)) {
-    　　　　div.classList.add("stamped");
-　　　　}
+       if (stamped.has(index)) {
+          div.classList.add("stamped");
+       }
 
 
         div.innerHTML = `
@@ -83,8 +83,6 @@ function init() {
 
     updateUI();
 }
-// ★スタンプ状態を保存する
-localStorage.setItem("stamped", JSON.stringify([...stamped]));
 
 // URLパラメータから id を取得して該当マスを開く
 const params = new URLSearchParams(window.location.search);
@@ -98,7 +96,7 @@ if (id) {
         const index = Number(id) - 1;
         stamped.add(index);
 　　　　// ★保存する
-　　　　localStorage.setItem("stamped", JSON.stringify([...stamped]));
+       localStorage.setItem("stamped", JSON.stringify([...stamped]));
 
         // 見た目も更新
         targetCell.classList.add("stamped");
