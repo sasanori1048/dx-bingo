@@ -282,3 +282,39 @@ if (id) {
         updateUI();
     }
 }
+/* ------------------------------------------------------------
+   QRコード読み取り機能
+------------------------------------------------------------ */
+document.getElementById("scanBtn").addEventListener("click", async () => {
+    try {
+        // 背面カメラを起動
+        const stream = await navigator.mediaDevices.getUserMedia({
+            video: { facingMode: "environment" }
+        });
+        const video = document.getElementById("preview");
+        video.srcObject = stream;
+
+        // jsQRライブラリを使ってQR解析（CDNで読み込む）
+        const canvas = document.createElement("canvas");
+        const context = canvas.getContext("2d");
+
+        const scanLoop = () => {
+            if (video.readyState === video.HAVE_ENOUGH_DATA) {
+                canvas.height = video.videoHeight;
+                canvas.width = video.videoWidth;
+                context.drawImage(video, 0, 0, canvas.width, canvas.height);
+                const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+                const code = jsQR(imageData.data, canvas.width, canvas.height);
+                if (code) {
+                    // QRコードのURLを開く
+                    window.location.href = code.data;
+                }
+            }
+            requestAnimationFrame(scanLoop);
+        };
+        scanLoop();
+    } catch (err) {
+        alert("カメラを起動できませんでした。設定を確認してください。");
+        console.error(err);
+    }
+});
