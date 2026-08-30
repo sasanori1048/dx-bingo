@@ -242,11 +242,16 @@ function updatePrizes() {
 function resetBingo() {
     if (!confirm("ビンゴをリセットしますか？")) return;
 
+    // ★ localStorage を完全に消す
+    localStorage.removeItem("stamped");
+
+    // 内部状態もリセット
     stamped.clear();
     bingoCount = 0;
 
     init();
 }
+
 
 /* ------------------------------------------------------------
    モーダル外クリックで閉じる
