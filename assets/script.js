@@ -45,7 +45,12 @@ function init() {
     bingoData.forEach((cell, index) => {
         const div = document.createElement("div");
         div.className = "bingo-cell";
+
+        // ★ここを追加する（QRコード用のID）
+        div.dataset.id = index + 1;  
+        // 既存の index は内部処理用にそのまま残す
         div.dataset.index = index;
+
 
         if (cell.free) {
             div.classList.add("free");
