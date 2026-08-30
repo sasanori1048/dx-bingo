@@ -95,7 +95,7 @@ if (id) {
         // ★内部状態も更新する（これが重要）
         const index = Number(id) - 1;
         stamped.add(index);
-　　　　 // ★保存する
+        // ★保存する
         localStorage.setItem("stamped", JSON.stringify([...stamped]));
 
         // 見た目も更新
