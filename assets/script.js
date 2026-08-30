@@ -87,7 +87,8 @@ if (id) {
         // 見た目も更新
         targetCell.classList.add("stamped");
 
-        // UI更新（スタンプ数など）
+        // ★これが抜けていた（ビンゴ判定とUI更新）
+        checkBingo();
         updateUI();
     }
 }
