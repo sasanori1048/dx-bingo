@@ -292,14 +292,15 @@ if (id) {
 ------------------------------------------------------------ */
 document.getElementById("scanBtn").addEventListener("click", async () => {
     try {
-        // 背面カメラを起動
-        const stream = await navigator.mediaDevices.getUserMedia({
+        const video = document.getElementById("preview");
+
+        // ★ stream を外側で保持する（Androidで必須）
+        let stream = await navigator.mediaDevices.getUserMedia({
             video: { facingMode: "environment" }
         });
-        const video = document.getElementById("preview");
+
         video.srcObject = stream;
 
-        // jsQRライブラリを使ってQR解析（CDNで読み込む）
         const canvas = document.createElement("canvas");
         const context = canvas.getContext("2d");
 
@@ -308,18 +309,26 @@ document.getElementById("scanBtn").addEventListener("click", async () => {
                 canvas.height = video.videoHeight;
                 canvas.width = video.videoWidth;
                 context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
                 const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
                 const code = jsQR(imageData.data, canvas.width, canvas.height);
+
                 if (code) {
-                    // QRコードのURLを開く
-                    window.location.href = code.data;
+                    // ★ カメラ停止（Androidで必須）
+                    stream.getTracks().forEach(t => t.stop());
+
+                    // ★ ループ停止してページ遷移
+                    return window.location.href = code.data;
                 }
             }
             requestAnimationFrame(scanLoop);
         };
+
         scanLoop();
+
     } catch (err) {
         alert("カメラを起動できませんでした。設定を確認してください。");
         console.error(err);
     }
 });
+
