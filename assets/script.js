@@ -84,28 +84,6 @@ function init() {
     updateUI();
 }
 
-// URLパラメータから id を取得して該当マスを開く
-const params = new URLSearchParams(window.location.search);
-const id = params.get("id");
-
-if (id) {
-    const targetCell = document.querySelector(`.bingo-cell[data-id='${id}']`);
-    if (targetCell) {
-
-        // ★内部状態も更新する（これが重要）
-        const index = Number(id) - 1;
-        stamped.add(index);
-        // ★保存する
-        localStorage.setItem("stamped", JSON.stringify([...stamped]));
-
-        // 見た目も更新
-        targetCell.classList.add("stamped");
-
-        // ★これが抜けていた（ビンゴ判定とUI更新）
-        checkBingo();
-        updateUI();
-    }
-}
 
 /* ------------------------------------------------------------
    スタンプ ON/OFF
@@ -282,3 +260,25 @@ document.getElementById("modalOverlay").addEventListener("click", function(e) {
 ------------------------------------------------------------ */
 init();  // ← まずマスを作る
 
+// URLパラメータから id を取得して該当マスを開く
+const params = new URLSearchParams(window.location.search);
+const id = params.get("id");
+
+if (id) {
+    const targetCell = document.querySelector(`.bingo-cell[data-id='${id}']`);
+    if (targetCell) {
+
+        // ★内部状態も更新する（これが重要）
+        const index = Number(id) - 1;
+        stamped.add(index);
+        // ★保存する
+        localStorage.setItem("stamped", JSON.stringify([...stamped]));
+
+        // 見た目も更新
+        targetCell.classList.add("stamped");
+
+        // ★これが抜けていた（ビンゴ判定とUI更新）
+        checkBingo();
+        updateUI();
+    }
+}
