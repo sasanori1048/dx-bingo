@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DXビンゴラリー</title>
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<div class="container">
+
+    <!-- Header -->
+    <div class="header">
+        <div class="header-badge">DX BINGO RALLY</div>
+        <h1>DXビンゴラリー（新案）</h1>
+        <p>
+            工場内のQRコードを読み取りながら、<br>
+            半導体製造の未来を学ぼう！
+        </p>
+    </div>
+
+    <!-- How to Play -->
+    <div class="how-to-play">
+        <div class="how-to-title">📘 遊び方</div>
+        <ol class="how-to-list">
+            <li><span class="step-num">①</span> 工場内のQRコードを探そう</li>
+            <li><span class="step-num">②</span> QRを読み取って説明を読もう</li>
+            <li><span class="step-num">③</span> スタンプを集めてビンゴを目指そう</li>
+            <li><span class="step-num">④</span> ビンゴ達成で景品ゲット！</li>
+        </ol>
+    </div>
+
+    <!-- Bingo Card -->
+    <div class="bingo-card">
+        <div class="bingo-grid" id="bingoGrid"></div>
+    </div>
+
+    <!-- Status Bar -->
+    <div class="status-bar">
+        <div class="status-row">
+            <div class="status-label">スタンプ数</div>
+            <div class="status-value" id="stampCount">0</div>
+        </div>
+        <div class="status-row">
+            <div class="status-label">ビンゴ達成数</div>
+            <div class="status-value" id="bingoCount">0</div>
+        </div>
+        <div class="bingo-count" id="bingoDots"></div>
+    </div>
+
+    <!-- Prize Section -->
+    <div class="prize-section">
+        <div class="prize-title">🎁 景品一覧</div>
+        <div class="prize-list" id="prizeList"></div>
+    </div>
+
+    <!-- Reset Button -->
+    <button class="reset-btn" onclick="resetBingo()">リセットする</button>
+
+</div>
+
+<!-- Modal -->
+<div class="modal-overlay" id="modalOverlay">
+    <div class="modal" id="modal">
+        <div class="modal-icon" id="modalIcon">🔍</div>
+        <h2 id="modalTitle">タイトル</h2>
+        <p id="modalDesc">説明文が入ります。</p>
+        <button class="modal-btn" onclick="closeModal()">閉じる</button>
+    </div>
+</div>
+
+<!-- Celebration -->
+<div class="celebration" id="celebration"></div>
+
+<script src="assets/script.js"></script>
+
+</body>
+</html>
