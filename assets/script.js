@@ -282,18 +282,3 @@ document.getElementById("modalOverlay").addEventListener("click", function(e) {
 ------------------------------------------------------------ */
 init();  // ← まずマスを作る
 
-// ★そのあとで URLパラメータ処理を実行する
-const params = new URLSearchParams(window.location.search);
-const id = params.get("id");
-
-if (id) {
-    const targetCell = document.querySelector(`.bingo-cell[data-id='${id}']`);
-    if (targetCell) {
-        const index = Number(id) - 1;
-        stamped.add(index);
-        targetCell.classList.add("stamped");
-        checkBingo();
-        updateUI();
-    }
-}
-
