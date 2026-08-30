@@ -72,7 +72,16 @@ function init() {
 
     updateUI();
 }
+// URLパラメータから id を取得して該当マスを開く
+const params = new URLSearchParams(window.location.search);
+const id = params.get("id");
 
+if (id) {
+    const targetCell = document.querySelector(`.bingo-cell[data-id='${id}']`);
+    if (targetCell) {
+        targetCell.classList.add("stamped");
+    }
+}
 /* ------------------------------------------------------------
    スタンプ ON/OFF
 ------------------------------------------------------------ */
