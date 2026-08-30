@@ -462,3 +462,40 @@ body {
         transform: translateY(120vh) rotate(360deg);
     }
 }
+/* QR読み取りボタン（scan-btn）をかっこよくする */
+.scan-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    padding: 14px 20px;
+
+    background: linear-gradient(135deg, #0078ff, #00c6ff);
+    color: #fff;
+    font-size: 20px;
+    font-weight: bold;
+
+    border: none;
+    border-radius: 12px;
+
+    box-shadow: 0 4px 12px rgba(0, 120, 255, 0.3);
+    cursor: pointer;
+
+    margin-top: 20px;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+/* ホバー時（スマホはタップ時） */
+.scan-btn:active,
+.scan-btn:hover {
+    transform: scale(0.97);
+    box-shadow: 0 2px 8px rgba(0, 120, 255, 0.5);
+}
+
+/* アイコンを少し大きく */
+.scan-btn::before {
+    content: "📷";
+    font-size: 24px;
+    margin-right: 8px;
+}
