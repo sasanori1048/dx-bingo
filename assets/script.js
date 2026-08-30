@@ -79,9 +79,19 @@ const id = params.get("id");
 if (id) {
     const targetCell = document.querySelector(`.bingo-cell[data-id='${id}']`);
     if (targetCell) {
+
+        // ★内部状態も更新する（これが重要）
+        const index = Number(id) - 1;
+        stamped.add(index);
+
+        // 見た目も更新
         targetCell.classList.add("stamped");
+
+        // UI更新（スタンプ数など）
+        updateUI();
     }
 }
+
 /* ------------------------------------------------------------
    スタンプ ON/OFF
 ------------------------------------------------------------ */
